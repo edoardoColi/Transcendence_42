@@ -1,0 +1,94 @@
+version: '3.9'
+
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+    volumes:
+      - V_elastic:/usr/share/elasticsearch/data
+      - ./elastic-dir/my_template.json:/usr/share/elasticsearch/config/my_template.json
+    environment:    #used to inline define variable for the container
+      - discovery.type=single-node    #ensure Elasticsearch for local development doesn't form of try join a cluster
+      - xpack.security.enabled=false  #set security to true for production
+    ports:
+      - "9200:9200"
+    networks:
+      - DockerNetwork   #ensure that hostname modifications made within a Docker container are accessible from other containers on the same Docker network
+
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.10.0
+    volumes:
+      - ./logstash-dir/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5044:5044"
+    networks:
+      - DockerNetwork   #ensure that hostname modifications made within a Docker container are accessible from other containers on the same Docker network
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.9.2
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    networks:
+      - DockerNetwork   #ensure that hostname modifications made within a Docker container are accessible from other containers on the same Docker network
+
+  # nginx:
+  #   image: nginx:latest
+  #   container_name: nginx_reverse_proxy
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - kibana
+  #     - elasticsearch
+  #     - prometheus
+  #     - grafana
+
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - "9090:9090"
+
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - prometheus
+
+  # # Load Testing (NGINX base)
+  # nginx_base:
+  #   image: nginx:latest
+  #   container_name: nginx_base
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./nginx_load_test.conf:/etc/nginx/nginx.conf
+
+volumes:
+  V_elastic:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/tmp/elastic/'
+
+networks:
+  DockerNetwork:
+    driver: bridge
+            # Bridge (default): is the default and creates a private internal network on the host.
+            # Host: allows a container to share the network namespace with the host, effectively bypassing any network isolation.
+            # Overlay: is designed for multi-host deployments.
+            # Macvlan: enables containers to have their own unique MAC addresses and appear as separate physical devices on the network.
+            # Calico: is a popular networking and network security solution for container orchestration platforms like Kubernetes.
+            # ...
