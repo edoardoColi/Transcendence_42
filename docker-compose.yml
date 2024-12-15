@@ -1,0 +1,27 @@
+services:
+  # reverse-proxy server
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: proxy-service
+    ports:
+      - "8000:8000"
+    networks:
+      - proxy
+    depends_on:
+      - frontend-node
+
+  # Frontend Node.js
+  frontend-node:
+    container_name: node-service
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - proxy
+
+# Networks configuration
+networks:
+  proxy:
+    driver: bridge
