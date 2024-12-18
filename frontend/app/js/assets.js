@@ -19,6 +19,7 @@ export function updateNavbar() {
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a data-link href="/" class="nav-link px-2 link-secondary text-white">Home</a></li>
             <li><a data-link href="/giochi" class="nav-link px-2 link-secondary text-white">Gioca</a></li>
+            <li><a download href="./../module.txt" class="nav-link px-2 link-secondary text-white">Moduli</a></li>
             <li><a data-link href="/login" class="nav-link px-2 link-secondary text-white">Accedi</a></li>
           </ul>
         </div>
@@ -34,6 +35,7 @@ export function updateNavbar() {
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a data-link href="/" class="nav-link px-2 link-secondary text-white">Home</a></li>
             <li><a data-link href="/giochi" class="nav-link px-2 link-secondary text-white">Gioca</a></li>
+            <li><a download href="./../module.txt" class="nav-link px-2 link-secondary text-white">Moduli</a></li>
           </ul>
           <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

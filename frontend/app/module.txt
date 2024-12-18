@@ -1,0 +1,17 @@
+Major module:
+    [X] Use a Framework as backend
+    [-] Standard user management, authentication, users across tournaments
+    [ ] Implementing a remote authentication
+    [ ] Remote players
+    [ ] Add Another Game with User History and Matchmaking
+    [ ] Game Customization Options
+    [ ] Introduce an AI Opponent
+    [-] Implement Two-Factor Authentication (2FA) and JWT
+    [ ] Enabling Pong Gameplay via CLI against Web Users with API Integration
+
+Minor module:
+    [X] Use a front-end framework or toolkit
+    [X] Use a database for the backend
+    [ ] User and Game Stats Dashboards
+    [ ] Expanding Browser Compatibility
+    [ ] Multiple language supports

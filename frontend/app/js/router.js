@@ -29,7 +29,7 @@ export function router() {
   if (potentialMatch) {
     if(potentialMatch.path!='/2fa')
       sessionStorage.removeItem('tempjwt');
-    
+
     if((sessionStorage.getItem('jwtToken')==null && (potentialMatch.path=='/gioco1/locale_gioco' || potentialMatch.path=='/gioco1/locale_home')) || (sessionStorage.getItem('tempjwt')==null && potentialMatch.path=='/2fa')){
       navigateTo("/");
       return;
