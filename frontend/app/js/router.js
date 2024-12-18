@@ -17,6 +17,10 @@ export function router() {
   ];
   const potentialMatch = routes.find((route) => location.pathname === route.path);
   if (potentialMatch) {
+    if(potentialMatch!=load2faPage)
+      localStorage.removeItem('tempjwt');
+    if(localStorage.getItem('jwtToken')=='' && (potentialMatch!=load2faPage))
+      navigateTo("/");
     potentialMatch.view();
   } else {
     document.getElementById('main-content').innerHTML = '<div class="d-flex justify-content-center"><h2 class="text-white">Immagine una bellissima pagina: 404 Risorsa non trovata</h2></div>';

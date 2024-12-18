@@ -23,8 +23,7 @@ export function loadLoginPage() {
     </div>
   `;
   document.getElementById('loggin').addEventListener('click', () => {
-    localStorage.setItem('tempemail', 'emailtemp');
-    localStorage.setItem('temppass', 'passtemp');
+    localStorage.setItem('tempjwt', 'tempjwt');
     navigateTo('/2fa');
   });
 }

@@ -11,3 +11,9 @@ prune:
 	-docker system prune --all --force --volumes
 
 all: prune start
+
+MSG=$$(read var; echo $$var;)
+m:
+	git add .
+	git commit -m "$(MSG)"
+	git push

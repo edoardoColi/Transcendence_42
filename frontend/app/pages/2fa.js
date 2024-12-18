@@ -18,10 +18,9 @@ export function load2faPage() {
   `;
   document.getElementById('valid').addEventListener('click', () => {
     localStorage.setItem('imguser', './../img/user/_default.png');
-    localStorage.removeItem('tempemail');
-    localStorage.removeItem('temppass');
     localStorage.setItem('jwtToken', 'log');
     localStorage.setItem('email', 'nome');
+    localStorage.removeItem('tempjwt');
     navigateTo('/');
     updateNavbar();
   });
