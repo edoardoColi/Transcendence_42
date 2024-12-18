@@ -1,5 +1,5 @@
-import { updateNavbar } from './../js/assets.js';
-import { navigateTo } from './../js/router.js';
+import { updateNavbar } from './../../js/assets.js';
+import { navigateTo } from './../../js/router.js';
 
 export function load2faPage() {
   const content = document.getElementById('main-content');
@@ -17,10 +17,10 @@ export function load2faPage() {
     </div>
   `;
   document.getElementById('valid').addEventListener('click', () => {
-    localStorage.setItem('imguser', './../img/user/_default.png');
-    localStorage.setItem('jwtToken', 'log');
-    localStorage.setItem('email', 'nome');
-    localStorage.removeItem('tempjwt');
+    sessionStorage.setItem('imguser', './../img/_default.png');
+    sessionStorage.setItem('jwtToken', 'log');
+    sessionStorage.setItem('p1', 'angly');
+    sessionStorage.removeItem('tempjwt');
     navigateTo('/');
     updateNavbar();
   });

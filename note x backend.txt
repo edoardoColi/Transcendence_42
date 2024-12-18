@@ -1,40 +1,73 @@
+NOTA:
+    tabelle per: utenti, giochi
+
 /* ============ Utenti ============ */
 /login
 Method post
-Campi Json aspettati: email, password
-Campi Json ritornati: key
+Campi Json aspettati: email, password, fotoprofilo
+Campi Json ritornati: key, nome, fotoprofilo
 Cosa fa: verifica se le credenziali esistono nel db e se si devi inviare una email con il codice: OTP e ritornare un codice JWT temporaneo
 Codici ritornati:
     200 tutto ok
     204 credenziali sbaliate
     500 altri errori
 
+/registra
+Method post
+Campi Json aspettati: email, nome, password
+Campi Json ritornati: key, fotoprofilo
+Cosa fa: crea l'utente
+Codici ritornati:
+    200 tutto ok
+    204 email gia usata
+    205 nome gia usato
+    500 altri errori
+
 /2af
 Method post
 Campi Json aspettati: codeotp
-Campi Json ritornati: jwttoken
+Campi Json ritornati: jwttoken, fotoprofilo
 Cosa fa: verifica il codice 
 Codici ritornati:
     200 tutto ok
     204 codice jwt sbagliato
     500 altri errori
 
-
 /profilo
 Method get
 Campi Json aspettati: NULL (Nota: ti verra passato il JWT nella autorizzazioni)
-Campi Json ritornati: email, nome, totalewin, totalelose, totalegame, {(array da max 20 elementi) nomep1, nomep2, esito, data, punteggio, gioco}
-Cosa fa: ritorna le informazione del profilo: nota se non ci sono partite o in caso e erroe delle partite mettere: NULL
+Campi Json ritornati: email, nome
+Cosa fa: ritorna le informazione del profilo
 Codici ritornati:
     200 tutto ok
     500 altri errori
 
 /modificaprofilo
 Method post
-Campi Json aspettati: nome, password
+Campi Json aspettati: nome, password, fotoprofilo
 Campi Json ritornati: NULL
 Cosa fa: se vuoto non modificare il campo
 Codici ritornati:
     200 tutto ok
     204 nome gia in uso
+    500 altri errori
+
+/* ============ Gioco 1 ============ */
+/stats
+Method get
+Campi Json aspettati: NULL (Nota: ti verra passato il JWT nella autorizzazioni)
+Campi Json ritornati: totalewin, totalelose, totaledraw,totalegame, {(array da max 20 elementi, in ordine dal piu recente indietro) nomep2, esito, data, punteggio, gioco}
+Cosa fa: ritorna le stat e le ultime partire
+Codici ritornati:
+    200 tutto ok
+    400 se non ci sono dati
+    500 altri errori
+
+/stats
+Method post
+Campi Json aspettati: nomep2, esito, data, punteggio, gioco (Nota: ti verra passato il JWT nella autorizzazioni)
+Campi Json ritornati: NULL
+Cosa fa: carica la partita nel bd
+Codici ritornati:
+    200 tutto ok
     500 altri errori

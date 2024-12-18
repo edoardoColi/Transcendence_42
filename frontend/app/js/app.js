@@ -1,8 +1,6 @@
 import { navigateTo,router } from './router.js';
 import { updateNavbar } from './assets.js';
 
-localStorage.setItem('jwtToken', '');
-
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', (e) => {
     const target = e.target;

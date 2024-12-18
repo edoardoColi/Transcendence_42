@@ -1,4 +1,4 @@
-import { navigateTo } from './../js/router.js';
+import { navigateTo } from './../../js/router.js';
 
 export function loadLoginPage() {
   const content = document.getElementById('main-content');
@@ -23,7 +23,7 @@ export function loadLoginPage() {
     </div>
   `;
   document.getElementById('loggin').addEventListener('click', () => {
-    localStorage.setItem('tempjwt', 'tempjwt');
+    sessionStorage.setItem('tempjwt', 'tempjwt');
     navigateTo('/2fa');
   });
 }
