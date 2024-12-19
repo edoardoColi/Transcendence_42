@@ -1,6 +1,8 @@
 import { navigateTo,router } from './router.js';
 import { updateNavbar } from './assets.js';
 
+sessionStorage.setItem('lingua', 'it');
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', (e) => {
     const target = e.target;

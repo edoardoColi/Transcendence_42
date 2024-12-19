@@ -7,6 +7,7 @@ import { load2faPage } from '../pages/utenti/2fa.js';
 import { loadGiochiHomePage } from '../pages/giochi.js';
 import { loadLocaleHomeGame1Page } from '../pages/gioco1/locale_home.js';
 import { loadLocaleGame1Page } from '../pages/gioco1/locale_gioco.js';
+import { loadCustumeserPage } from '../pages/gioco1/costumeser.js';
 
 export function navigateTo(url) {
   history.pushState(null, null, url);
@@ -24,6 +25,7 @@ export function router() {
     { path: '/giochi', view: loadGiochiHomePage },
     { path: '/gioco1/locale_home', view: loadLocaleHomeGame1Page },
     { path: '/gioco1/locale_gioco', view: loadLocaleGame1Page },
+    { path: '/gioco1/costumeser', view: loadCustumeserPage },
   ];
   const potentialMatch = routes.find((route) => location.pathname === route.path);
   if (potentialMatch) {

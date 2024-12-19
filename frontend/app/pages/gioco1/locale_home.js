@@ -11,7 +11,7 @@ export function loadLocaleHomeGame1Page() {
                     <label class="text-black" for="floatingInput">Nome Gest</label>
                 </div>
                 <h3 class="h3 mb-3 fw-normal text-white" id="texterror"></h3>
-                <button class="btn btn-primary w-100 py-2" id="iniza">Inizia</button>
+                <button class="btn btn-primary w-100 py-2" id="iniza">Avanti</button>
                 <p class="mt-5 mb-3">
                     <a data-link href="/giochi" class="h4 px-2 link-secondary text-white">Torna indietro</a>
                 </p>
@@ -29,6 +29,6 @@ export function loadLocaleHomeGame1Page() {
             return;
         }
         sessionStorage.setItem('p2', p2);
-        navigateTo('/gioco1/locale_gioco');
+        navigateTo('/gioco1/costumeser');
     });
 }

@@ -18,17 +18,36 @@ export class Ball {
   }
 
   update(canvas, leftPaddle, rightPaddle) {
+    if(sessionStorage.getItem('caosg1')=='true'){
+      if(Math.floor(Math.random() * 11)==1){
+        if(Math.floor(Math.random() * 3)==1){
+          this.y -= Math.floor(Math.random() * 6);
+          this.x -= Math.floor(Math.random() * 6);
+        }else{
+          this.y += Math.floor(Math.random() * 6);
+          this.x += Math.floor(Math.random() * 6);
+        }
+      }
+    }
     this.x += this.dx;
     this.y += this.dy;
     if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
       this.dy *= -1;
     }
 
-    if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
+    if (this.x - this.radius < 9) {
       this.x = canvas.width / 2;
       this.y = canvas.height / 2;
       this.dx *= -1;
+      this.pp2++;
     }
+    if (this.x + this.radius > canvas.width-9) {
+      this.x = canvas.width / 2;
+      this.y = canvas.height / 2;
+      this.dx *= -1;
+      this.pp1++;
+    }
+    document.getElementById('testo').innerHTML=sessionStorage.getItem('p1')+" "+this.pp1+" - "+this.pp2+" "+sessionStorage.getItem('p2');
   }
 
   checkCollision(leftPaddle, rightPaddle) {

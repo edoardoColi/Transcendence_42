@@ -1,8 +1,14 @@
 export function loadHomePage() {
+  import(`./../traduzioni/${sessionStorage.getItem('lingua')}.js`)
+  .then((module) => {
+    const text = module.text;
     const content = document.getElementById('main-content');
     content.innerHTML = `
-      <div class="d-flex justify-content-center">
-        <h2 class="text-white">Immagina una fighissama home page</h2>
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="text-white">`+text.p1+`</h1>
+        <br><br>
+        <h3 class="text-white">`+text.p2+`</h3>
       </div>
     `;
+  })
 }
