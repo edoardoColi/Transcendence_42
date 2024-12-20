@@ -14,6 +14,8 @@ export function navigateTo(url) {
   router();
 }
 
+export let activeTimers = [];
+
 export function router() {
   const routes = [
     { path: '/', view: loadHomePage },
@@ -29,6 +31,13 @@ export function router() {
   ];
   const potentialMatch = routes.find((route) => location.pathname === route.path);
   if (potentialMatch) {
+    activeTimers.forEach(id => clearInterval(id));
+
+    if (document.getElementById('gameOverModal') != null) {
+      const modal = bootstrap.Modal.getInstance(document.getElementById('gameOverModal'));
+      if(modal) modal.hide();
+    }    
+
     if(potentialMatch.path!='/2fa')
       sessionStorage.removeItem('tempjwt');
 

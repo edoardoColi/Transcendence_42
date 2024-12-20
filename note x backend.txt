@@ -42,6 +42,15 @@ Codici ritornati:
     200 tutto ok
     500 altri errori
 
+/profilo
+Method get
+Campi Json aspettati: NULL (Nota: ti verra passato il JWT nella autorizzazioni)
+Campi Json ritornati: email, nome
+Cosa fa: ritorna le informazione del profilo
+Codici ritornati:
+    200 tutto ok
+    500 altri errori
+
 /modificaprofilo
 Method post
 Campi Json aspettati: nome, password, fotoprofilo
@@ -56,7 +65,7 @@ Codici ritornati:
 /stats
 Method get
 Campi Json aspettati: NULL (Nota: ti verra passato il JWT nella autorizzazioni)
-Campi Json ritornati: totalewin, totalelose, totaledraw,totalegame, {(array da max 20 elementi, in ordine dal piu recente indietro) nomep2, esito, data, punteggio, gioco}
+Campi Json ritornati: totalewin, totalelose, totaledraw,totalegame, {(array da max 20 elementi, in ordine dal piu recente indietro) nomep2, nomep3, nomep4, esito, data, punteggio, gioco, tipo}
 Cosa fa: ritorna le stat e le ultime partire
 Codici ritornati:
     200 tutto ok
@@ -65,7 +74,7 @@ Codici ritornati:
 
 /stats
 Method post
-Campi Json aspettati: nomep2, esito, data, punteggio, gioco (Nota: ti verra passato il JWT nella autorizzazioni)
+Campi Json aspettati: nomep2, nomep3, nomep4, esito, data, punteggio, gioco, tipo (Nota: ti verra passato il JWT nella autorizzazioni)
 Campi Json ritornati: NULL
 Cosa fa: carica la partita nel bd
 Codici ritornati:

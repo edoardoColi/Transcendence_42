@@ -8,7 +8,7 @@ export class Paddle {
     this.height = height;
     this.upKey = upKey;
     this.downKey = downKey;
-    this.speed = parseFloat(sessionStorage.getItem('velmovg1')) || 0;
+    this.speed = parseFloat(sessionStorage.getItem('velmovg1'))+10;
     this.dy = 0;
     this.dx = 0;
     this.timercaos = 0;
@@ -44,7 +44,7 @@ export class Paddle {
       if(this.timercaos==0) this.aumenta=true;
       if(this.timercaos==100) this.aumenta=false;
 
-      if(sessionStorage.getItem('nplayerg1')==2){
+      if(this.pos === 'sg'){
         if(this.aumenta==true){
           if(this.oheight==this.height) this.height=this.height+Math.floor(Math.random() * 30);
           this.timercaos++;

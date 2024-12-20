@@ -37,7 +37,7 @@ export function loadCustumeserPage() {
                     </div>
                     <button class="btn btn-primary w-100 py-2" id="iniza">`+text.p26+`</button>
                     <p class="mt-5 mb-3">
-                        <a data-link href="/giochi" class="h4 px-2 link-secondary text-white">`+text.p19+`</a>
+                        <a data-link href="/locale_home" class="h4 px-2 link-secondary text-white">`+text.p19+`</a>
                     </p>
                 </main>
             </div>
