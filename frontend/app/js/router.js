@@ -23,29 +23,35 @@ export function router() {
     { path: '/2fa', view: load2faPage },
 
     { path: '/giochi', view: loadGiochiHomePage },
-    { path: '/gioco1/locale_home', view: loadLocaleHomeGame1Page },
-    { path: '/gioco1/locale_gioco', view: loadLocaleGame1Page },
-    { path: '/gioco1/costumeser', view: loadCustumeserPage },
+    { path: '/locale_home', view: loadLocaleHomeGame1Page },
+    { path: '/locale_gioco', view: loadLocaleGame1Page },
+    { path: '/costumeser', view: loadCustumeserPage },
   ];
   const potentialMatch = routes.find((route) => location.pathname === route.path);
   if (potentialMatch) {
     if(potentialMatch.path!='/2fa')
       sessionStorage.removeItem('tempjwt');
 
-    if((sessionStorage.getItem('jwtToken')==null && (potentialMatch.path=='/gioco1/locale_gioco' || potentialMatch.path=='/gioco1/locale_home')) || (sessionStorage.getItem('tempjwt')==null && potentialMatch.path=='/2fa')){
+    if((sessionStorage.getItem('jwtToken')==null && (potentialMatch.path=='/locale_gioco' || potentialMatch.path=='/locale_home')) || (sessionStorage.getItem('tempjwt')==null && potentialMatch.path=='/2fa')){
       navigateTo("/");
       return;
     }
 
     const navbar = document.getElementById('navbar-content');
-    if (potentialMatch.path === '/gioco1/locale_gioco')
+    if (potentialMatch.path === '/locale_gioco')
       navbar.style.display = 'none';
     else
       navbar.style.display = 'block';
     
       potentialMatch.view();
   } else {
-    document.getElementById('main-content').innerHTML = '<div class="d-flex justify-content-center"><h2 class="text-white">Immagine una bellissima pagina: 404 Risorsa non trovata</h2></div>';
+    if(sessionStorage.getItem('lingua')==null)
+      sessionStorage.setItem('lingua', 'it');
+    import(`./../../traduzioni/${sessionStorage.getItem('lingua')}.js`)
+    .then((module) => {
+      const text = module.text;
+      document.getElementById('main-content').innerHTML = '<div class="d-flex justify-content-center"><h2 class="text-white">'+text.p30+'</h2></div>';
+    })
   }
 }
 window.addEventListener('popstate', router);

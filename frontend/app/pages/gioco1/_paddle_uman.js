@@ -1,25 +1,37 @@
 export class Paddle {
-  constructor(x, y, width, height, upKey, downKey) {
+  constructor(x, y, width, height, upKey, downKey, pos) {
     this.x = x;
     this.y = y;
     this.oheight = height;
+    this.owidth = width;
     this.width = width;
     this.height = height;
     this.upKey = upKey;
     this.downKey = downKey;
     this.speed = parseFloat(sessionStorage.getItem('velmovg1')) || 0;
     this.dy = 0;
+    this.dx = 0;
     this.timercaos = 0;
+    this.pos=pos;
     this.aumenta = true;
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === this.upKey) this.dy = -this.speed;
-      if (e.key === this.downKey) this.dy = this.speed;
+      if (e.key === this.upKey) {
+        if (this.pos === 'sg') this.dy = -this.speed;
+        else {this.dx = -this.speed;}
+      }
+      if (e.key === this.downKey) {
+        if (this.pos === 'sg') this.dy = this.speed;
+        else{this.dx = this.speed;}
+      }
     });
 
     document.addEventListener('keyup', (e) => {
-      if (e.key === this.upKey || e.key === this.downKey) this.dy = 0;
-    });
+      if (e.key === this.upKey || e.key === this.downKey) {
+        this.dy = 0;
+        this.dx = 0;
+      }
+    });    
   }
 
   draw(ctx) {
@@ -32,16 +44,32 @@ export class Paddle {
       if(this.timercaos==0) this.aumenta=true;
       if(this.timercaos==100) this.aumenta=false;
 
-      if(this.aumenta==true){
-        if(this.oheight==this.height) this.height=this.height+50;
-        this.timercaos++;
+      if(sessionStorage.getItem('nplayerg1')==2){
+        if(this.aumenta==true){
+          if(this.oheight==this.height) this.height=this.height+Math.floor(Math.random() * 30);
+          this.timercaos++;
+        }else{
+          if(this.oheight!=this.height) this.height=this.oheight;
+          this.timercaos--;
+        }
       }else{
-        if(this.oheight!=this.height) this.height=this.height-50;
-        this.timercaos--;
+        if(this.aumenta==true){
+          if(this.owidth==this.width) this.width=this.width+Math.floor(Math.random() * 30);
+          this.timercaos++;
+        }else{
+          if(this.owidth!=this.width) this.width=this.owidth;
+          this.timercaos--;
+        }
       }
     }
     this.y += this.dy;
-    if (this.y < 0) this.y = 0;
-    if (this.y + this.height > canvas.height) this.y = canvas.height - this.height;
+    this.x += this.dx;
+    if (this.pos === 'sg') {
+      if (this.y < 0) this.y = 0; 
+      if (this.y + this.height > canvas.height) this.y = canvas.height - this.height;
+    } else {
+      if (this.x < 0) this.x = 0; 
+      if (this.x + this.width > canvas.width) this.x = canvas.width - this.width;
+    }
   }
 }

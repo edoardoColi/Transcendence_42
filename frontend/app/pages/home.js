@@ -1,4 +1,6 @@
 export function loadHomePage() {
+  if(sessionStorage.getItem('lingua')==null)
+    sessionStorage.setItem('lingua', 'it');
   import(`./../traduzioni/${sessionStorage.getItem('lingua')}.js`)
   .then((module) => {
     const text = module.text;
